@@ -1,15 +1,19 @@
 <?php
     $sql = "CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
-        user_name VARCHAR(20) NOT NULL UNIQUE
+        user_name VARCHAR(20) NOT NULL UNIQUE,
+        user_password VARCHAR(255) NOT NULL
     )";
     makeTable($conn, $sql, "users");
 
     $sql = "CREATE TABLE IF NOT EXISTS posts (
         post_id INT AUTO_INCREMENT PRIMARY KEY,
-        upload_url VARCHAR(255),
         user_id INT NOT NULL,
-        post_rating INT DEFAULT 0,
+        post_title VARCHAR (30),
+        post_content TEXT,
+        post_rating INT,
+        upload_url VARCHAR(255),
+        post_type ENUM('text','image','video') NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
         FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -19,9 +23,9 @@
 
     $sql = "CREATE TABLE IF NOT EXISTS comments (
         comment_id INT AUTO_INCREMENT PRIMARY KEY,
-        comment_content VARCHAR(400),
         user_id INT NOT NULL,
         post_id INT NOT NULL,
+        comment_content TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
         FOREIGN KEY (user_id) REFERENCES users(user_id)

@@ -11,6 +11,12 @@
 </head>
 <body>
 
-    <header>
-        <h1>Socialmedia of socialmedias</h1>
+    <header class="site-header">
+        <div class="header-container">
+        <div class="logo-symbol">
+            <h1>𝕍</h1>
+        </div>
+        <div class="headerButtons">
+        </div>
+    </div>
     </header>

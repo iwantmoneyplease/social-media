@@ -1,4 +1,35 @@
 <?php 
+
+function makeTable($conn, $sql, $name) {
+    try {
+        $conn->query($sql);
+        displayMsg("success", "Table " . $name . " created successfully");
+    } catch(mysqli_sql_exception $e){
+        displayMsg("error",  $name . " already exists");
+    }
+}
+
+function makeEnv(){
+    $env = [
+        'DB_HOST' => $_POST["host"],
+        'DB_PORT' => '3306',
+        'DB_DATABASE' => $_POST["dbname"],
+        'DB_USER' => $_POST["dbuser"],
+        'DB_PASSWORD' => $_POST["dbpass"],
+    ];
+    $content = "";
+    foreach ($env as $key => $value) {
+        $content .= "{$key}={$value}\n";
+    }
+
+    $file = __DIR__ . '/.env';
+    if (file_put_contents($file, $content)) {
+        displayMsg("success", "All done");
+    } else {
+        echo "Något knas";
+    }
+}
+
 function displayMsg($type, $string){
     echo " <div class='alert alert-{$type}' role='alert'>
                 <p>{$string}</p>
@@ -77,9 +108,5 @@ function uploadImg($i, $conn, $last_project_id){
     }
 
     return $target_file;
-}
-
-function createThumbnail(){
-    
 }
 ?>

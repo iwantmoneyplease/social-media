@@ -25,42 +25,20 @@
         include_once("../../prefabs/maketable.php");
 
         //dummy data
-        $conn->query("INSERT INTO disease (name, info) VALUES ('viktorosis', 'deadly disease with readily ease')");
-        
+        $conn->query("INSERT IGNORE INTO users (user_id, user_name) VALUES
+        (1, 'leo'),
+        (2, 'viktor'),
+        (3, 'jason')");
+        $conn->query("INSERT INTO posts (upload_url, user_id, post_rating, post_title) VALUES
+        ('', 2, 5, 'Cool picture'),
+        ('', 1, 2, 'My rant about ARKit'),
+        ('', 3, 7, 'Check this video out')");
+        $conn->query("INSERT INTO comments (comment_content, user_id, post_id) VALUES
+        ('Nice post!', 2, 1),
+        ('AWFUL. DISLIKE.', 3, 1),
+        ('Cool video!', 1, 2)");
+
         makeEnv();
     }
     $conn->close();
-
-    function makeTabel($conn, $sql, $name) {
-        try {
-            $conn->query($sql);
-            displayMsg("success", "Tabel " . $name . " created successfully");
-        } catch(mysqli_sql_exception $e){
-            displayMsg("error",  $name . " already exists");
-        }
-    }
-
-    function makeEnv(){
-        $env = [
-            'DB_HOST' => $_POST["host"],
-            'DB_PORT' => '3306',
-            'DB_DATABASE' => $_POST["dbname"],
-            'DB_USER' => $_POST["dbuser"],
-            'DB_PASSWORD' => $_POST["dbpass"],
-        ];
-        $content = "";
-        foreach ($env as $key => $value) {
-            $content .= "{$key}={$value}\n";
-        }
-
-        $file = __DIR__ . '/.env';
-        if (file_put_contents($file, $content)) {
-            displayMsg("success", "All done");
-        } else {
-            echo "Något knas";
-        }
-
-        echo '<a href="/index/index.php"">Gå till index</a>';
-    }
 ?>
-
