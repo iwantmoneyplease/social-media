@@ -1,7 +1,7 @@
 <?php include("../templates/header.php"); ?>
 
 <!--sidebar (left)-->
-<div class="sidebar animate-left" id="dirSidebar">
+<div class="sidebar animate-left displayBlock" id="dirSidebar">
   <button class="closeSidebarBtn barButton"
   onclick="closeSidebar()">Close &times;</button>
   <a href="#" class="barItem barButton">Link 1</a>
@@ -11,8 +11,21 @@
 
 <!--infobar (right)-->
 <div class="infobar" id="dirInfobar">
-  <div>
+  <div class="infoSquare">
     <p>hej</p>
+  </div>
+  <div class="footerSub">
+    <span>
+      <a href="#">test</a>
+      <a href="#">test</a>
+      <a href="#">test</a>
+    </span>
+    <span>
+      <a href="#">test</a>
+      <a href="#">test</a>
+      <a href="#">test</a>
+      <a href="#">test</a>
+    </span>
   </div>
 </div>
 
@@ -31,14 +44,29 @@
 <!--scripts-->
 <script>
 function openSidebar() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("dirSidebar").style.width = "20%";
-  document.getElementById("dirSidebar").style.display = "block";
+  const sidebar = document.getElementById("dirSidebar");
+  const main = document.getElementById("main");
+
+  sidebar.classList.remove("sidebarClosed");
+  sidebar.classList.add("sidebarOpen");
+
+  main.style.marginLeft = "22vw";
+
   document.getElementById("openNav").style.display = 'none';
 }
+
 function closeSidebar() {
-  document.getElementById("main").style.marginLeft = "20%";
-  document.getElementById("dirSidebar").style.display = "none";
+  const sidebar = document.getElementById("dirSidebar");
+  const main = document.getElementById("main");
+
+  // Swap the classes
+  sidebar.classList.remove("sidebarOpen");
+  sidebar.classList.add("sidebarClosed");
+
+  // Reset the main content margin so it centers or fills the space
+  main.style.marginLeft = "auto";
+
+  // Show the button that allows users to re-open the sidebar
   document.getElementById("openNav").style.display = "inline-block";
 }
 </script>
