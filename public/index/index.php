@@ -47,8 +47,8 @@ function openSidebar() {
   const sidebar = document.getElementById("dirSidebar");
   const main = document.getElementById("main");
 
-  sidebar.classList.remove("sidebarClosed");
-  sidebar.classList.add("sidebarOpen");
+  sidebar.classList.remove("displayNone");
+  sidebar.classList.add("displayBlock");
 
   main.style.marginLeft = "22vw";
 
@@ -59,14 +59,11 @@ function closeSidebar() {
   const sidebar = document.getElementById("dirSidebar");
   const main = document.getElementById("main");
 
-  // Swap the classes
-  sidebar.classList.remove("sidebarOpen");
-  sidebar.classList.add("sidebarClosed");
+  sidebar.classList.remove("displayBlock");
+  sidebar.classList.add("displayNone");
 
-  // Reset the main content margin so it centers or fills the space
-  main.style.marginLeft = "auto";
+  main.style.marginLeft = "20vw";
 
-  // Show the button that allows users to re-open the sidebar
   document.getElementById("openNav").style.display = "inline-block";
 }
 </script>
