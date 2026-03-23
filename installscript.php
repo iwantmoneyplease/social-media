@@ -29,10 +29,10 @@
         (1, 'leo'),
         (2, 'viktor'),
         (3, 'jason')");
-        $conn->query("INSERT INTO posts (upload_url, user_id, post_rating, post_title) VALUES
-        ('', 2, 5, 'Cool picture'),
-        ('', 1, 2, 'My rant about ARKit'),
-        ('', 3, 7, 'Check this video out')");
+        $conn->query("INSERT INTO posts (upload_url, user_id, post_rating, post_title, post_content) VALUES
+        ('', 2, 5, 'Cool picture', 'Lorem ipsum...'),
+        ('', 1, 2, 'My rant about ARKit', 'Lorem ipsum...'),
+        ('', 3, 7, 'Check this video out', 'Lorem ipsum...')");
         $conn->query("INSERT INTO comments (comment_content, user_id, post_id) VALUES
         ('Nice post!', 2, 1),
         ('AWFUL. DISLIKE.', 3, 1),

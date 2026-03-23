@@ -1,0 +1,53 @@
+@use "variable";
+
+.infobar {
+  top: 50px;
+  background-color: variable.$background-color;
+  height: calc(100vh - 50px);
+  width: 330px;
+  position: fixed !important;
+  right: 0;
+  z-index: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoSquare {
+  background-color: variable.$infoSquare-color;
+  width: auto;
+  height: 400px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-right: 2vw;;
+}
+
+.footerSub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.links {
+  text-decoration: none;
+  color: rgb(165, 165, 165);
+}
+
+//media----------------------------------------------------------------------
+
+@media (max-width: 950px) {
+  .infobar {
+    display: none;
+  }
+
+  #main {
+    margin: 0 auto;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    width: auto;
+    max-width: none;
+  }
+}
