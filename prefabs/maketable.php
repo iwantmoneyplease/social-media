@@ -21,6 +21,15 @@
     )";
     makeTable($conn, $sql, "posts");
 
+    $sql = "CREATE TABLE IF NOT EXISTS post_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES posts(post_id)
+    ON DELETE CASCADE
+    )";
+    makeTable($conn, $sql, "post_images");
+
     $sql = "CREATE TABLE IF NOT EXISTS comments (
         comment_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,

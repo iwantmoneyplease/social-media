@@ -7,8 +7,9 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    overflow-y: auto;
 
-    background-color: rgba(0, 0, 0, 0.6); 
+    background-color: rgba(0, 0, 0, 0.5); 
     z-index: 9999;
 
     justify-content: center;
@@ -22,12 +23,14 @@
     background-color: variable.$background-color;
     width: 60%;
     max-width: 900px;
-    height: 90vh;
+    height: 100vh;
     border-radius: 20px;
     position: relative;
     display: flex; 
-    overflow: hidden;
     animation: modalFadeIn 0.1s ease;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 @keyframes modalFadeIn {

@@ -12,18 +12,21 @@
 <!--infobar (right)-->
 <div class="infobar" id="dirInfobar">
   <div class="infoSquare">
-    <p>hej</p>
+    <div class="mediaGrid">
+    </div>
+    <div class="infoTxt"></div>
   </div>
-  <div class="footerSub">
-    <span class="links">
+  <div class="footerSub links">
+    <span>
       <a href="../index.php">Homepage</a>
       <a href="../index/add-post.php">Create post</a>
       <a href="../index/add-account.php">Create account</a>
     </span>
     <span>
+      <a href="../dash/admin.php">Admin</a>
       <a href="#">Privacy notice</a>
-      <a href="#">Don't sell my data</a>
       <a href="#">Terms of Service</a>
+      <a href="#">Sitemap</a>
     </span>
   </div>
 </div>
@@ -31,105 +34,76 @@
 <!--center of page-->
 <div id="main">
     <button id="openNav" class="openSidebarBtn" onclick="openSidebar()">&#9776;</button>
+<?php
+$query = "SELECT posts.*, users.user_name, post_images.image_url
+        FROM posts
+        JOIN users ON posts.user_id = users.user_id
+        LEFT JOIN post_images ON post_images.post_id = posts.post_id
+        ORDER BY posts.created_at DESC";
 
-    <?php
-    // 1. The SQL Query: We join 'posts' and 'users' to get the username 
-    // instead of just the user_id number.
-    $query = "SELECT posts.*, users.user_name 
-              FROM posts
-              JOIN users ON posts.user_id = users.user_id 
-              ORDER BY created_at DESC";
+$result = $conn->query($query);
 
-    $result = $conn->query($query);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
 
-    if ($result->num_rows > 0) {
-        // 2. The Loop: This runs for every single row found in the database
-        while($row = $result->fetch_assoc()) {
+        $title = htmlspecialchars($row['post_title'], ENT_QUOTES);
+        $content = htmlspecialchars($row['post_content'], ENT_QUOTES);
+        $user = htmlspecialchars($row['user_name']);
+        $postId = $row['post_id'];
+        $image = $row['image_url'];
+        ?>
 
-            // We escape the strings to prevent JavaScript errors in the onclick
-            $title = htmlspecialchars($row['post_title'], ENT_QUOTES);
-            $content = htmlspecialchars($row['post_content'], ENT_QUOTES);
-            $user = htmlspecialchars($row['user_name']);
-            ?>
-
-            <div class="post" onclick="openPost('<?php echo $user; ?>','<?php echo $title; ?>', '<?php echo $content; ?>')">
-                <div class="postHeader">
-                    <p>@<?php echo $user; ?></p>
-                </div>
-                <div class="postTitle">
-                    <h5><?php echo $row['post_title']; ?></h5>
-                </div>
-                <div class="postContent">
-                    <p><?php echo $row['post_content']; ?></p>
-                </div>
-                <div class="postActions">
-                    <span>Rating: <?php echo $row['post_rating']; ?></span>
-                </div>
+        <div class="post" onclick="openPost('<?php echo $user; ?>','<?php echo $title; ?>', '<?php echo $content; ?>', '<?php echo $image; ?>')">
+            <div class="postHeader">
+                <p><?php echo $user; ?></p>
+            </div>
+            <div class="postTitle">
+                <h5><?php echo $row['post_title']; ?></h5>
+            </div>
+            <div class="postContent">
+                <p><?php echo $row['post_content']; ?></p>
             </div>
 
             <?php
-        }
-    } else {
-        echo "<p>No posts yet. Be the first to share!</p>";
+            $imgQuery = $conn->prepare("SELECT image_url FROM post_images WHERE post_id = ?");
+            $imgQuery->bind_param("i", $postId);
+            $imgQuery->execute();
+            $imgResult = $imgQuery->get_result();
+
+            if($imgResult->num_rows > 0) {
+                echo '<div class="postImages">';
+                $first = true;
+                while($imgRow = $imgResult->fetch_assoc()) {
+                    $imgUrl = htmlspecialchars($imgRow['image_url']);
+                    if($first) {
+                        echo "<div class='imageWrapper'>
+                                <img class='bgImage' src='$imgUrl'>
+                                <img class='mainImage' src='$imgUrl'>
+                              </div>";
+                        $first = false;
+                    }
+                }
+            echo '</div>';
+            }
+            $imgQuery->close();
+            ?>
+            
+            <div class="postActions">
+                <span>
+                    <button>test</button>
+                    <button>test</button>
+                    <p>Rating: <?php echo $row['post_rating']; ?></p>
+                </span>
+            </div>
+        </div>
+        <?php
     }
-    ?>
-</div>
 
-<!--
-<div id="main">
-    <button id="openNav" class="openSidebarBtn" onclick="openSidebar()">&#9776;</button>
-
-    <div class="post" onclick="openPost('Title of post', 'Lorem ipsum content here...')">
-      <div class="postHeader">
-        <p>user</p>
-      </div>
-      <div class="postTitle">
-        <h5>Title of post</h5>
-      </div>
-      <div class="postContent">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="postActions">
-        <a href="../index.php">Main website</a>
-        <a href="../index/add-post.php">Create post</a>
-        <a href="../index/add-account.php">Create account</a>
-      </div>
-    </div>
-    <div class="post">
-      <div class="postHeader">
-        <p>user</p>
-      </div>
-      <div class="postTitle">
-        <h5>Title of post</h5>
-      </div>
-      <div class="postContent">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="postActions">
-        <a href="../index.php">Main website</a>
-        <a href="../index/add-post.php">Create post</a>
-        <a href="../index/add-account.php">Create account</a>
-      </div>
-    </div>
-    <div class="post">
-      <div class="postHeader">
-        <p>user</p>
-      </div>
-      <div class="postTitle">
-        <h5>Title of post</h5>
-      </div>
-      <div class="postContent">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="postActions">
-        <a href="../index.php">Main website</a>
-        <a href="../index/add-post.php">Create post</a>
-        <a href="../index/add-account.php">Create account</a>
-      </div>
-    </div>
-    <p>hej</p>
+} else {
+    echo "<p>sorry we outta posts</p>";
+}
+?>
 </div>
--->
 
 <!--scripts-->
 <script>
@@ -173,10 +147,9 @@ function closeSidebar() {
   document.getElementById("openNav").style.display = "inline-block";
 }
 
-function openPost(user, title, content) {
+function openPost(user, title, content, image) {
     const modal = document.getElementById("postModal");
     const modalBody = document.getElementById("modalBody");
-    // We use innerHTML to build the 'Instagram' style view
     modalBody.innerHTML = `
         <div class="modal-layout">
             <div class="modal-user">
@@ -185,7 +158,11 @@ function openPost(user, title, content) {
             <div class="modal-main">
                 <h1>${title}</h1>
                 <p>${content}</p>
+                <div class='imageWrapper'>
+                    <img class="modal-image" src='${image}'>
+                </div>
             </div>
+            <div class="modal-actions">
             <div class="modal-comments">
                 <form method="post">
                     <input type="text" name="comment_content" placeholder="Write your thoughts...">
@@ -198,10 +175,11 @@ function openPost(user, title, content) {
         </div>
     `;
     modal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Disable background scroll
+    document.body.style.overflow = "hidden";
 }
 
 function closeModal(event) {
     document.getElementById("postModal").style.display = "none";
+    document.body.style.overflow = "visible";
 }
 </script>

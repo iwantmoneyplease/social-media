@@ -12,7 +12,7 @@
 
 <div id="postModal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-modal" onclick="document.getElementById('postModal').style.display='none'">&times;</span>
+        <span class="close-modal" onclick="closeModal(event)">&times;</span>
         <div id="modalBody">
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class="logo-symbol">
             <h1>𝕍</h1>
         </div>
-        <div class="headerButtons">
+        <div class="headerButtons links">
             <a href="../index/add-account.php" class="btn-create-account">Create account</a>
             <a href="../index/add-post.php" class="">Create post</a>
         </div>

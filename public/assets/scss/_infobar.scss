@@ -22,6 +22,30 @@
   margin-right: 2vw;;
 }
 
+.mediaGrid {
+  height: 50%;
+  width: 100%;
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.mediaObject {
+  background-color: gray;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mediaObject img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .footerSub {
   display: flex;
   flex-direction: column;
@@ -31,9 +55,10 @@
   font-size: 12px;
 }
 
-.links {
+.links a {
   text-decoration: none;
   color: rgb(165, 165, 165);
+  margin: 0px 2px 0px 2px;
 }
 
 //media----------------------------------------------------------------------
