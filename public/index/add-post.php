@@ -1,5 +1,5 @@
 <?php include("../templates/header.php"); ?>
-<main id="createpost">
+<main id="create-post">
     <form method="post" action="post-add-post.php" enctype="multipart/form-data">
         <p>Fill in to create your post</p>
         <input type="text" name="post_title" placeholder="Title">

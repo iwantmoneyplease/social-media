@@ -23,10 +23,10 @@
       <a href="../index/add-account.php">Create account</a>
     </span>
     <span>
+      <a href="#">Profile</a>
       <a href="../dash/admin.php">Admin</a>
       <a href="#">Privacy notice</a>
       <a href="#">Terms of Service</a>
-      <a href="#">Sitemap</a>
     </span>
   </div>
 </div>
@@ -87,15 +87,16 @@ if ($result->num_rows > 0) {
             }
             $imgQuery->close();
             ?>
-            
+
             <div class="postActions">
-                <span>
-                    <button>test</button>
-                    <button>test</button>
+                    <div class="actionBtn"><img src="../assets/visual-assets/thumb-up.png"></div>
+                    <div class="actionBtn"><img src="../assets/visual-assets/thumb-down.png"></div>
+                    <div class="actionBtn"><img src="../assets/visual-assets/share.png"></div>
                     <p>Rating: <?php echo $row['post_rating']; ?></p>
-                </span>
             </div>
         </div>
+
+        <div class="postDivider"></div>
         <?php
     }
 
@@ -158,17 +159,40 @@ function openPost(user, title, content, image) {
             <div class="modal-main">
                 <h1>${title}</h1>
                 <p>${content}</p>
-                <div class='imageWrapper'>
-                    <img class="modal-image" src='${image}'>
-                </div>
+                    <div class="modal-imageWrapper">
+                        <img class="modal-bgImage" src='${image}'>
+                        <img class="modal-mainImage" src='${image}'>
+                    </div>
             </div>
             <div class="modal-actions">
             <div class="modal-comments">
-                <form method="post">
-                    <input type="text" name="comment_content" placeholder="Write your thoughts...">
+                <div class="comment-input-div">
+                    <form method="post">
+                        <input type="text" class="comment-input-div-btn" name="comment_content" placeholder="Write your thoughts...">
 
-                    <input class="btn btn-primary" type="submit" name="Send">
-                </form>
+                        <input class="comment-input-div-btn" type="submit" value="Send">
+                    </form>
+                </div>
+                    $query = "SELECT comments.*, users.user_name, posts.post_id
+                        FROM comments
+                        JOIN users ON comments.user_id = users.user_id
+                        JOIN posts ON comments.post_id = posts.post_id
+                        ORDER BY comments.created_at DESC";
+
+                    $result = $conn->query($query);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+
+                            $content = htmlspecialchars($row['comment_content'], ENT_QUOTES);
+                            $user = htmlspecialchars($row['user_name']);
+                            $postId = $row['post_id'];
+                            ?>
+                        
+                            <div class="comment">
+
+                            </div>
+
                 <h6>Comments</h6>
                 <p style="color: gray; font-size: 12px;">Comments coming soon...</p>
             </div>

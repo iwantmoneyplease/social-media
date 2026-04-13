@@ -1,0 +1,17 @@
+@use "variable";
+
+.account-square {
+    margin-top: 20vh;
+    width: 30vw;
+    height: 200px;
+    background-color: #e8e8e8;
+    border-radius: 15px;
+    border: 2px solid #ffffff;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: auto;
+}

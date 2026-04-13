@@ -1,5 +1,40 @@
 @use "variable";
 
+
+.modal-imageWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+
+    background: rgba(0,0,0,2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-bgImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    filter: blur(25px);
+    transform: scale(1.3);
+    opacity: 0.4;
+}
+
+.modal-mainImage {
+    position: relative;
+    max-width: 100%;
+    max-height: 540px;
+    object-fit: contain;
+    z-index: 1;
+}
+
 .modal-overlay {
     display: none; 
     position: fixed !important; 
@@ -8,6 +43,8 @@
     width: 100vw;
     height: 100vh;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 9999;
@@ -20,10 +57,11 @@
 }
 
 .modal-content {
-    background-color: variable.$background-color;
-    width: 60%;
+    background-color: variable.$primary;
+    width: 55%;
     max-width: 900px;
-    height: 100vh;
+    top: 70px;
+    height: auto;
     border-radius: 20px;
     position: relative;
     display: flex; 
@@ -53,4 +91,23 @@
 
 .modal-layout {
     padding: 20px 20px 10px 20px;
+}
+
+.comment-input-div {
+    margin-top: 10px;
+    background-color: gray;
+    border-radius: 25px;
+    width: 100%;
+    height: 30px;
+}
+
+.comment-input-div-btn {
+    border-radius: 25px;
+    height: 30px;
+
+}
+
+.comment-input-div-txt {
+    border-radius: 25px;
+    margin: auto;
 }
