@@ -53,15 +53,15 @@ if ($result->num_rows > 0) {
         $image = $row['image_url'];
         ?>
 
-        <div class="post" onclick="openPost('<?php echo $user; ?>','<?php echo $title; ?>', '<?php echo $content; ?>', '<?php echo $image; ?>')">
+        <div class="post" onclick="openPost('<?php echo $user; ?>','<?php echo $title; ?>', '<?php echo $content; ?>', '<?php echo $image; ?>', '<?php echo $postId; ?>')">
             <div class="postHeader">
                 <p><?php echo $user; ?></p>
             </div>
             <div class="postTitle">
-                <h5><?php echo $row['post_title']; ?></h5>
+                <h5><?php echo $title; ?></h5>
             </div>
             <div class="postContent">
-                <p><?php echo $row['post_content']; ?></p>
+                <p><?php echo $content; ?></p>
             </div>
 
             <?php
@@ -148,9 +148,10 @@ function closeSidebar() {
   document.getElementById("openNav").style.display = "inline-block";
 }
 
-function openPost(user, title, content, image) {
+function openPost(user, title, content, image, postId) {
     const modal = document.getElementById("postModal");
     const modalBody = document.getElementById("modalBody");
+
     modalBody.innerHTML = `
         <div class="modal-layout">
             <div class="modal-user">
@@ -167,39 +168,47 @@ function openPost(user, title, content, image) {
             <div class="modal-actions">
             <div class="modal-comments">
                 <div class="comment-input-div">
-                    <form method="post">
+                    <form method="post" action="save-comments.php">
                         <input type="text" class="comment-input-div-btn" name="comment_content" placeholder="Write your thoughts...">
 
-                        <input class="comment-input-div-btn" type="submit" value="Send">
+                        <input type="hidden" name="post_id" value="${postId}">
+
+                        <input type="submit" value="Send">
                     </form>
                 </div>
-                    $query = "SELECT comments.*, users.user_name, posts.post_id
-                        FROM comments
-                        JOIN users ON comments.user_id = users.user_id
-                        JOIN posts ON comments.post_id = posts.post_id
-                        ORDER BY comments.created_at DESC";
+            
+                <div id="comments-list" class="comment">
 
-                    $result = $conn->query($query);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-
-                            $content = htmlspecialchars($row['comment_content'], ENT_QUOTES);
-                            $user = htmlspecialchars($row['user_name']);
-                            $postId = $row['post_id'];
-                            ?>
-                        
-                            <div class="comment">
-
-                            </div>
+                </div>
 
                 <h6>Comments</h6>
                 <p style="color: gray; font-size: 12px;">Comments coming soon...</p>
+                </div>
             </div>
         </div>
     `;
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
+
+    loadComments(postId);
+}
+
+function loadComments(postId) {
+    const container = document.getElementById("comments-list");
+    
+    // Fetch data from your PHP script
+    fetch('get-comments.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'post_id=' + postId
+    })
+    .then(response => response.text())
+    .then(data => {
+        container.innerHTML = data;
+    })
+    .catch(err => {
+        container.innerHTML = "Error loading comments.";
+    });
 }
 
 function closeModal(event) {
