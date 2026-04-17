@@ -25,7 +25,7 @@
     <span>
       <a href="#">Profile</a>
       <a href="../dash/admin.php">Admin</a>
-      <a href="#">Privacy notice</a>
+      <a href="../index/login.php">Log in</a>
       <a href="#">Terms of Service</a>
     </span>
   </div>
