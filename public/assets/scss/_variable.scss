@@ -1,9 +1,78 @@
-$primary: #FFFFFF;
-$secondary: #f9f9f9;
-$text-color: #262626;
-$border: #b8b8b8;
-$divider:#e8e8e8;
+:root {
+    color-scheme: light dark;
+  --primary: #FFFFFF;
+  --secondary: #f9f9f9;
+  --text-color: #262626;
+  --border: #b8b8b8;
+  --divider: #e8e8e8;
+  --actionBar-btn: #ebebeb;
+  --accent-orng: #ff6a00;
+  --dark-primary: #121212;
+  --dark-secondary: #282828; 
+  --dark-text-color: #ffffff;
+  --dark-border: #333333;
+  --dark-divider: #2a2a2a;
+  --dark-actionBar-btn: #3d3d3d;
+  --dark-post-modal: #1d1d1d;
 
-$actionBar-btn:#ebebeb;
+  --icon-thumb-up: url('../assets/visual-assets/thumb-up.png');
+  --icon-thumb-down: url('../assets/visual-assets/thumb-down.png');
+  --icon-share: url('../assets/visual-assets/share.png');
+  --icon-more: url('../assets/visual-assets/more.png');
+  --dark-icon-thumb-up: url('../assets/visual-assets/dark-thumb-up.png');
+  --dark-icon-thumb-down: url('../assets/visual-assets/dark-thumb-down.png');
+  --dark-icon-share: url('../assets/visual-assets/dark-share.png');
+  --dark-icon-more: url('../assets/visual-assets/dark-more.png');
+}
 
-$accent-orng: #ff6a00;
+$primary: light-dark(var(--primary), var(--dark-primary));
+$secondary: light-dark(var(--secondary), var(--dark-secondary));
+$post-modal: light-dark(var(--primary), var(--dark-post-modal));
+$text-color: light-dark(var(--text-color), var(--dark-text-color));
+$border: light-dark(var(--border), var(--dark-border));
+$divider: light-dark(var(--divider), var(--dark-divider));
+$actionBar-btn: light-dark(var(--actionBar-btn), var(--dark-actionBar-btn));
+$accent-orng: light-dark(var(--accent-orng), var(--dark-accent-orng));
+
+$icon-thumb-up: light-dark(var(--icon-thumb-up), var(--dark-icon-thumb-up));
+$icon-thumb-down: light-dark(var(--icon-thumb-down), var(--dark-icon-thumb-down));
+$icon-share: light-dark(var(--icon-share), var(--dark-icon-share));
+$icon-more: light-dark(var(--icon-more), var(--dark-icon-more));
+
+.actionBtn.thumb-up {
+  width: 24px; height: 24px; // Set your icon size
+  background-image: $icon-thumb-up;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+body {
+  background-color: var(--primary);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    color-scheme: light;
+
+}
+body:has(#dark-mode-toggle:checked) {
+    color-scheme: dark;
+}
+
+.toggle {
+  cursor: pointer;
+  padding: 8px 12px;
+  background: var(--actionBar-btn);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-color);
+  user-select: none;
+  display: inline-block;
+
+  &:hover {
+    border-color: var(--accent-orng);
+  }
+
+  #dark-mode-toggle:checked + & {
+    background: var(--accent-orng);
+    color: white;
+  }
+}

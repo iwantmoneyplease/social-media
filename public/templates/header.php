@@ -19,14 +19,22 @@
 </div>
 
 <body>
-    <header class="site-header">
-        <div class="header-container">
+<header class="site-header">
+    <div class="header-container">
         <div class="logo-symbol">
             <h1>𝕍</h1>
         </div>
-        <div class="headerButtons links">
-            <a href="../index/add-account.php" class="btn-create-account">Create account</a>
-            <a href="../index/add-post.php" class="">Create post</a>
+        
+        <div class="headerBtn-container">
+            <div class="darkmodeBtn-container toggle">
+                <input type="checkbox" id="dark-mode-toggle" />
+                <label for="dark-mode-toggle" class="">Dark mode</label>
+            </div>
+
+            <div class="headerButtons links">
+                <a href="../index/add-account.php" class="btn-create-account">Create account</a>
+                <a href="../index/add-post.php" class="">Create post</a>
+            </div>
         </div>
     </div>
-    </header>
+</header>

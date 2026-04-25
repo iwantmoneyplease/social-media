@@ -1,5 +1,6 @@
 <?php
-    $conn = mysqli_connect($_POST["host"], $_POST["dbuser"], $_POST["dbpass"]);
+echo "hello";
+   $conn = mysqli_connect($_POST["host"], $_POST["dbuser"], $_POST["dbpass"]);
     if(!$conn) {
         displayMsg("error", "Wrong passowrd for database");
         exit();
