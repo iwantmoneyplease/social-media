@@ -1,11 +1,27 @@
 @use "variable";
 
+.modalBody {
+    width: 100%;
+}
 
-.modal-imageWrapper {
+.modalHeader {
+
+    
+    & a {
+    text-decoration: none;
+    color: variable.$text-color;¨
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.modalImageWrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
     border-radius: 20px;
+    min-height: 400px;
 
     background: rgba(0,0,0,2);
     display: flex;
@@ -13,7 +29,7 @@
     align-items: center;
 }
 
-.modal-bgImage {
+.modalBgImage {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,15 +43,16 @@
     opacity: 0.4;
 }
 
-.modal-mainImage {
+.modalMainImage {
     position: relative;
     max-width: 100%;
+    min-height: 400px;
     max-height: 540px;
     object-fit: contain;
     z-index: 1;
 }
 
-.modal-overlay {
+.modalOverlay {
     display: none; 
     position: fixed !important; 
     top: 0;
@@ -56,9 +73,9 @@
     }
 }
 
-.modal-content {
+.modalContent {
     background-color: variable.$post-modal;
-    width: 55%;
+    width: 840px;
     max-width: 900px;
     top: 70px;
     height: auto;
@@ -76,7 +93,7 @@
     to { opacity: 1; transform: scale(1); }
 }
 
-.close-modal {
+.closeModal {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -85,29 +102,67 @@
     z-index: 10;
 }
 
-.modal-open {
+.modalOpen {
     display: flex;
 }
 
-.modal-layout {
+.modalLayout {
     padding: 20px 20px 10px 20px;
 }
 
-.comment-input-div {
+.commentInputDiv {
+    display: flex;
+    flex-direction: row;
     margin-top: 10px;
-    background-color: gray;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    height: 30px;
+    width: 100%;
+    gap: 10px;
+}
+
+.commentInputDivTxt {
     border-radius: 25px;
     width: 100%;
-    height: 30px;
+    height: 32px;
+    padding: 13px 13px 15px;
+    border: 2px solid variable.$secondary;
+    outline: 0;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-right: 5px;
+    &:focus {
+    border: 2px solid variable.$accent-orng;
+    }
 }
 
-.comment-input-div-btn {
-    border-radius: 25px;
-    height: 30px;
-
+.commentInputForm {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.comment-input-div-txt {
-    border-radius: 25px;
-    margin: auto;
+.commentDisplay {
+    margin-top: 20px;
+}
+
+.modalDivider {
+    width: 100%;
+    border-bottom: 1px solid variable.$divider;
+}
+
+//media-----------------------------------------
+
+
+@media (min-width: 841px) {
+    .modalContent {
+        width: 840px;
+    }
+}
+
+@media (max-width: 840px) {
+    .modalContent {
+        width: 100%;
+    }
 }

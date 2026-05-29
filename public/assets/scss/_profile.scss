@@ -1,1 +1,17 @@
 @use "variable";
+
+.profileMain {
+    padding-top: 50px;
+    width: 50vw;
+    margin: auto;
+    max-width: none;
+    min-height: 90vh;
+    background-color: variable.$primary;
+}
+
+.profile {
+    margin-right: 2vw;
+    margin-left: 2vw;
+    margin-top: 50px;
+    width: 50vw;
+}

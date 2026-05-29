@@ -28,12 +28,12 @@
     margin-left: 20vw;
 }
 
-.animate-left {
+.animateLeft {
   position: relative;
-  animation: animateleft 0.4s;
+  animation: animateSidebarleft 0.4s;
 }
 
-@keyframes animateleft {
+@keyframes animateSidebarleft {
   from {
     left: -300px;
     opacity: 0;

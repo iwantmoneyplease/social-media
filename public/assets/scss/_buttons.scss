@@ -1,0 +1,57 @@
+@use "variable";
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    border-radius: 20px;
+    background-color: variable.$actionBar-btn;
+    padding: 10px;
+}
+
+.actionBtn img {
+    max-width: 15px;
+    height: auto;
+}
+
+.actionBtn:hover {
+    background-color: variable.$accent-orng;
+    color: variable.$primary;
+}
+
+.commentInputDivBtn {
+    border-radius: 20px;
+    height: 32px;
+    border: 0px;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.sendCommentBtn {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.commentDropdownDivBtn {
+    border-radius: 20px;
+    height: 32px;
+    border: 0px;
+    padding: 10px;
+    gap: 0px;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.btn {
+    background-color: variable.$secondary;
+    border-radius: 25px;
+    color: variable.$text-color;
+    &.btnCreateAccount {
+        background-color: variable.$accent-orng;
+        color: variable.$white;
+        padding: 8px;
+    }
+}

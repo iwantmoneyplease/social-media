@@ -1,6 +1,6 @@
-session_start();
 <?php include("../templates/header.php"); ?>
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: index.php");
             exit();
         } else {
-            echo "Invalid password.";
+            header("Location: login.php");
         }
     } else {
-        echo "User not found.";
+        header("Location: login.php");
     }
     $stmt->close();
 }

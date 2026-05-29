@@ -1,10 +1,10 @@
 <?php include("../templates/header.php"); ?>
 
 <!--sidebar (left)-->
-<div class="sidebar animate-left displayBlock" id="dirSidebar">
+<div class="sidebar animateLeft displayBlock" id="dirSidebar">
   <button class="closeSidebarBtn barButton"
   onclick="closeSidebar()">Close &times;</button>
-  <a href="#" class="barItem barButton">Link 1</a>
+  <a href="../index/profile.php" class="barItem barButton">Profile</a>
   <a href="#" class="barItem barButton">Link 2</a>
   <a href="#" class="barItem barButton">Link 3</a>
 </div>
@@ -12,9 +12,7 @@
 <!--infobar (right)-->
 <div class="infobar" id="dirInfobar">
   <div class="infoSquare">
-    <div class="mediaGrid">
-    </div>
-    <div class="infoTxt"></div>
+    <div class="infoTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
   </div>
   <div class="footerSub links">
     <span>
@@ -23,17 +21,17 @@
       <a href="../index/add-account.php">Create account</a>
     </span>
     <span>
-      <a href="#">Profile</a>
+      <a href="../index/profile.php">Profile</a>
       <a href="../dash/admin.php">Admin</a>
       <a href="../index/login.php">Log in</a>
-      <a href="#">Terms of Service</a>
+      <a href="../../install/index.php">Install database</a>
     </span>
   </div>
 </div>
 
 <!--center of page-->
 <div id="main">
-    <button id="openNav" class="openSidebarBtn" onclick="openSidebar()">&#9776;</button>
+
 <?php
 $query = "SELECT posts.*, users.user_name, post_images.image_url
         FROM posts
@@ -51,11 +49,14 @@ if ($result->num_rows > 0) {
         $user = htmlspecialchars($row['user_name']);
         $postId = $row['post_id'];
         $image = $row['image_url'];
+        $postType = $row['post_type'];
         ?>
 
-        <div class="post" onclick="openPost('<?php echo $user; ?>','<?php echo $title; ?>', '<?php echo $content; ?>', '<?php echo $image; ?>', '<?php echo $postId; ?>')">
+        <div class="post" onclick='openPost(<?= json_encode($user) ?>, <?= json_encode($title) ?>, <?= json_encode($content) ?>, <?= json_encode($image) ?>, <?= json_encode($postId) ?>, <?= json_encode($postType) ?>)'>
             <div class="postHeader">
-                <p><?php echo $user; ?></p>
+                <a href="../index/profile.php?user=<?php echo urlencode($row['user_name']); ?>">
+                @<?php echo $user; ?>
+                </a>
             </div>
             <div class="postTitle">
                 <h5><?php echo $title; ?></h5>
@@ -89,10 +90,10 @@ if ($result->num_rows > 0) {
             ?>
 
             <div class="postActions">
-                    <div class="actionBtn"><img src="../assets/visual-assets/thumb-up.png"></div>
-                    <div class="actionBtn"><img src="../assets/visual-assets/thumb-down.png"></div>
-                    <div class="actionBtn"><img src="../assets/visual-assets/share.png"></div>
-                    <p>Rating: <?php echo $row['post_rating']; ?></p>
+                    <div class="actionBtn"><i class="iconoir-thumbs-up"></i>Like</div>
+                    <p><?php echo $row['post_rating']; ?></p>
+                    <div class="actionBtn"><i class="iconoir-thumbs-down"></i>Dislike</div>
+                    <div class="actionBtn"><i class="iconoir-send-diagonal"></i>Share</div>
             </div>
         </div>
 
@@ -101,7 +102,7 @@ if ($result->num_rows > 0) {
     }
 
 } else {
-    echo "<p>sorry we outta posts</p>";
+    echo "<p>No posts to display</p>";
 }
 ?>
 </div>
@@ -148,41 +149,55 @@ function closeSidebar() {
   document.getElementById("openNav").style.display = "inline-block";
 }
 
-function openPost(user, title, content, image, postId) {
+function openPost(user, title, content, image, postId, postType) {
     const modal = document.getElementById("postModal");
     const modalBody = document.getElementById("modalBody");
+    console.log(location.host + location.pathname);
+    const stateString = location.pathname + `?u=${user}&t=${title}&c=${content}&i=${image}&pi=${postId}&pt=${postType}`;
+    window.history.pushState("object or string", "Title", stateString);
+
+    const imageHTML = postType === 'image'
+    ? `<div class="modalImageWrapper">
+            <img class="modalBgImage" src='${image}'>
+            <img class="modalMainImage" src='${image}'>
+        </div>`
+    : '';
 
     modalBody.innerHTML = `
-        <div class="modal-layout">
-            <div class="modal-user">
-                <p>${user}</p>
+        <div class="modalLayout">
+            <div class="modalHeader">
+                <a href="../index/profile.php?user=${encodeURIComponent(user)}">@${user}</a>
             </div>
-            <div class="modal-main">
+            <div class="modalMain">
                 <h1>${title}</h1>
                 <p>${content}</p>
-                    <div class="modal-imageWrapper">
-                        <img class="modal-bgImage" src='${image}'>
-                        <img class="modal-mainImage" src='${image}'>
-                    </div>
+                ${imageHTML}
             </div>
-            <div class="modal-actions">
-            <div class="modal-comments">
-                <div class="comment-input-div">
-                    <form method="post" action="save-comments.php">
-                        <input type="text" class="comment-input-div-btn" name="comment_content" placeholder="Write your thoughts...">
+            <div class="modalActions">
+            <div class="modalComments">
+                <div class="commentInputDiv">
+                    <div class="actionBtn commentInputDivBtn"><i class="iconoir-thumbs-up"></i>Like</div>
+                    <div class="actionBtn commentInputDivBtn"><i class="iconoir-thumbs-down"></i>Dislike</div>
+                    <div class="actionBtn commentInputDivBtn"><i class="iconoir-send-diagonal"></i>Share</div>
+                    <div class="actionBtn commentDropdownDivBtn">⋯</div>
+                </div>
+                
+                <div class="modalDivider"></div>
+
+                <div id="commentInputDiv" class="commentInputDiv">
+                    <form method="post" action="save-comments.php" class="commentInputForm">
+                        <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
                         <input type="hidden" name="post_id" value="${postId}">
 
-                        <input type="submit" value="Send">
+                        <input class="sendCommentBtn commentInputDivBtn" type="submit" value="Send">
                     </form>
                 </div>
-            
-                <div id="comments-list" class="comment">
 
-                </div>
-
+                <div class="commentDisplay">
                 <h6>Comments</h6>
-                <p style="color: gray; font-size: 12px;">Comments coming soon...</p>
+            
+                <div id="commentsList" class="comment"></div>
                 </div>
             </div>
         </div>
@@ -194,9 +209,8 @@ function openPost(user, title, content, image, postId) {
 }
 
 function loadComments(postId) {
-    const container = document.getElementById("comments-list");
-    
-    // Fetch data from your PHP script
+    const container = document.getElementById("commentsList");
+
     fetch('get-comments.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -207,12 +221,26 @@ function loadComments(postId) {
         container.innerHTML = data;
     })
     .catch(err => {
-        container.innerHTML = "Error loading comments.";
+        container.innerHTML = "Error";
     });
 }
 
 function closeModal(event) {
+    const stateString = location.pathname;
+    window.history.pushState("object or string", "Title", stateString);
     document.getElementById("postModal").style.display = "none";
     document.body.style.overflow = "visible";
 }
+
+<?php 
+
+if($_GET){
+$param = implode(",", $_GET);
+?>
+
+    console.log("<?php echo $param; ?>");
+<?php
+}
+?>
 </script>
+

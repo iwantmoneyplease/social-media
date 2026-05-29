@@ -54,13 +54,6 @@
     background-color: variable.$primary;
 }
 
-.btn-create-account {
-    border-radius: 30px;
-    background-color: variable.$accent-orng;
-    padding: 10px;
-    color: variable.$primary;
-}
-
 .post {
     padding: 5px 10px 5px 10px;
     background-color: variable.$primary;
@@ -90,14 +83,15 @@
 
 .post:hover {
     background-color: variable.$secondary;
-    //transform: scale(1.005);
-    //z-index: 2;
-    //box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .postHeader {
     width: 100%;
     margin-bottom: 5px;
+    & a {
+        text-decoration: none;
+        color: variable.$text-color;
+    }
 }
 
 .postTitle {
@@ -119,26 +113,6 @@
     gap: 10px;
 }
 
-.site-header {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    background-color: variable.$primary; 
-    border-bottom: 1px solid variable.$border;
-}
-
-.header-container {
-    width: 100%;
-    box-sizing: border-box;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5rem;
-}
-
 .links a {
   text-decoration: none;
   color: rgb(165, 165, 165);
@@ -155,11 +129,6 @@ body {
 footer {
     padding: 10px;
     background-color: variable.$secondary;
-}
-
-.btn {
-    background-color: variable.$secondary;
-    border-radius: 0;
 }
 
 main {
@@ -184,23 +153,13 @@ main {
 }
 }
 
-.actionBtn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    width: 80px;
-    border-radius: 20px;
-    background-color: variable.$actionBar-btn;
-    padding: 10px;
+.logoSymbol a {
+    text-decoration: none;
+    color: variable.$text-color;
 }
 
-.actionBtn img {
-    max-width: 15px;
-    height: auto;
-}
-
-.actionBtn:hover {
-    background-color: rgb(202, 202, 255);
+.logoSymbol h1 {
+    font-size: 40px;
 }
 
 //media------------------------------------------------------------------
@@ -215,7 +174,7 @@ main {
     }
 
     .postDivider {
-        max-width: 700px;
+        max-width: 720px;
     }
 }
 

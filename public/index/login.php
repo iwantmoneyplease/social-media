@@ -1,5 +1,6 @@
-<?php include("../templates/header.php"); ?>
-<main id="login-account">
+<?php include("../templates/headerNoSidebar.php"); ?>
+
+<main id="login-account" class="login-main">
     <div class="account-square">
         <form method="post" action="post-login.php">
             <h2>Welcome to 𝕍</h2>

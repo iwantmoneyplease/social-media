@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("../../conn.php");
 
 function createThumbnail($filePath, $thumbWidth = 300) {
@@ -49,8 +50,7 @@ if ($_POST) {
     $title = $_POST['post_title'];
     $content = $_POST['post_content'];
     $type = $_POST['post_type'];
-
-    $user_id = 1; // temporary placeholder until accounts are implemented
+    $user_id = $_SESSION['user_id']; //experimental
 
     $stmt = $conn->prepare("INSERT INTO posts (user_id, post_title, post_content, post_type) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("isss", $user_id, $title, $content, $type);

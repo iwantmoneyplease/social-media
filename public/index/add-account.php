@@ -1,9 +1,15 @@
 <?php include("../templates/header.php"); ?>
 <main id="create-account">
-    <div class="account-square">
+    <div class="accountSquare">
         <form method="post" action="post-add-account.php">
             <h2>Welcome to 𝕍</h2>
-            <p>Fill in to create your account</p>
+
+            <?php if (isset($_GET['error']) && $_GET['error'] === 'usernametaken'): ?>
+                <p style="color: red;">Username taken</p>
+            <?php else: ?>
+                <p>Fill in to create your account</p>
+            <?php endif; ?>
+
             <input type="text" name="username" placeholder="Username">
             <input type="text" name="password" placeholder="password">
 

@@ -14,15 +14,11 @@
   --dark-divider: #2a2a2a;
   --dark-actionBar-btn: #3d3d3d;
   --dark-post-modal: #1d1d1d;
+  --dark-accent-orng: #ff6a00;
 
-  --icon-thumb-up: url('../assets/visual-assets/thumb-up.png');
-  --icon-thumb-down: url('../assets/visual-assets/thumb-down.png');
-  --icon-share: url('../assets/visual-assets/share.png');
-  --icon-more: url('../assets/visual-assets/more.png');
-  --dark-icon-thumb-up: url('../assets/visual-assets/dark-thumb-up.png');
-  --dark-icon-thumb-down: url('../assets/visual-assets/dark-thumb-down.png');
-  --dark-icon-share: url('../assets/visual-assets/dark-share.png');
-  --dark-icon-more: url('../assets/visual-assets/dark-more.png');
+  --white: #ffffff;
+  --black: #000000;
+  --linkColour: #a5a5a5;
 }
 
 $primary: light-dark(var(--primary), var(--dark-primary));
@@ -34,23 +30,15 @@ $divider: light-dark(var(--divider), var(--dark-divider));
 $actionBar-btn: light-dark(var(--actionBar-btn), var(--dark-actionBar-btn));
 $accent-orng: light-dark(var(--accent-orng), var(--dark-accent-orng));
 
-$icon-thumb-up: light-dark(var(--icon-thumb-up), var(--dark-icon-thumb-up));
-$icon-thumb-down: light-dark(var(--icon-thumb-down), var(--dark-icon-thumb-down));
-$icon-share: light-dark(var(--icon-share), var(--dark-icon-share));
-$icon-more: light-dark(var(--icon-more), var(--dark-icon-more));
-
-.actionBtn.thumb-up {
-  width: 24px; height: 24px; // Set your icon size
-  background-image: $icon-thumb-up;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+$white: var(--white);
+$black: var(--black);
+$linkColour: var(--linkColour);
 
 body {
   background-color: var(--primary);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    color-scheme: light;
+  //transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  color-scheme: light;
 
 }
 body:has(#dark-mode-toggle:checked) {

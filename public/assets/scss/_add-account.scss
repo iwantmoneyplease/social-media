@@ -1,12 +1,19 @@
 @use "variable";
 
-.account-square {
+.accountSquare {
     margin-top: 20vh;
     width: 30vw;
     height: 200px;
     background-color: #e8e8e8;
     border-radius: 15px;
     border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.inputForm {
+    display: flex;
+    justify-content: center;
 }
 
 main {
