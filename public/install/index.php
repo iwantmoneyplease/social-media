@@ -9,23 +9,12 @@
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 
-<div id="postModal" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-modal" onclick="closeModal(event)">&times;</span>
-        <div id="modalBody">
-        </div>
-    </div>
-</div>
-
 <body>
     <header class="site-header">
-        <div class="header-container">
-        <div class="logo-symbol">
-            <h1>𝕍</h1>
-        </div>
-        <div class="headerButtons links">
-            <a href="../index/add-account.php" class="btn-create-account">Create account</a>
-            <a href="../index/add-post.php" class="">Create post</a>
+        <div class="logoSymbol">
+            <a href="../index/index.php">
+                <h1>𝕍</h1>
+            </a>
         </div>
     </div>
     </header>

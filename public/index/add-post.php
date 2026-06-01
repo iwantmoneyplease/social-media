@@ -21,7 +21,6 @@
 <?php include("../templates/footer.php"); ?>
 
 <?php
-session_start();
 require("../../conn.php");
 
 if ($_POST) {

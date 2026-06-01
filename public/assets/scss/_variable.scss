@@ -6,7 +6,7 @@
   --border: #b8b8b8;
   --divider: #e8e8e8;
   --actionBar-btn: #ebebeb;
-  --accent-orng: #ff6a00;
+  --accent: #ff5d5d;
   --dark-primary: #121212;
   --dark-secondary: #282828; 
   --dark-text-color: #ffffff;
@@ -14,7 +14,7 @@
   --dark-divider: #2a2a2a;
   --dark-actionBar-btn: #3d3d3d;
   --dark-post-modal: #1d1d1d;
-  --dark-accent-orng: #ff6a00;
+  --dark-accent: #ff5d5d;
 
   --white: #ffffff;
   --black: #000000;
@@ -28,7 +28,7 @@ $text-color: light-dark(var(--text-color), var(--dark-text-color));
 $border: light-dark(var(--border), var(--dark-border));
 $divider: light-dark(var(--divider), var(--dark-divider));
 $actionBar-btn: light-dark(var(--actionBar-btn), var(--dark-actionBar-btn));
-$accent-orng: light-dark(var(--accent-orng), var(--dark-accent-orng));
+$accent: light-dark(var(--accent), var(--dark-accent));
 
 $white: var(--white);
 $black: var(--black);

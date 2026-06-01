@@ -63,29 +63,19 @@ $username = $_SESSION['user_name'] ?? 'Guest';
 </header>
 
 <script>
+const box = document.querySelector("#dark-mode-toggle");
 
-    document.getElementById("lightDarkSubmit").addEventListener("submit", function(event){
-        event.preventDefault();
-        const stationDisplay = document.getElementById("stationDisplay");
-        stationDisplay.innerHTML = "";
-        let results = stations.filter(function(cur){
-            return cur.name.toLowerCase().startsWith(inputHome.value.toLowerCase());
-        });
-        console.log(homeSubmit);
-        results.forEach(function(n) 
-        {
-            let p = document.createElement("p");
-            p.innerText = n.name;
-            p.addEventListener("click", function(){
-            localStorage.setItem("home", JSON.stringify(n));
-            let test = JSON.parse(localStorage.getItem("home"));
-            console.log(test.gid);
-            });
-
-            stationDisplay.append(p);
-
-        });
-    })
-
+const darkMode = document.cookie.includes("darkMode=true");
+box.checked = darkMode;
+//checks if there's a cookie for darkmode being active, where it then adds or removes the class
+box.addEventListener("change", () => {
+    if (box.checked) {
+        document.cookie = "darkMode=true;";
+        document.body.classList.add("dark");
+    } else {
+        document.cookie = "darkMode=false;";
+        document.body.classList.remove("dark");
+    }
+});
 </script>
 

@@ -7,7 +7,7 @@
   --border: #b8b8b8;
   --divider: #e8e8e8;
   --actionBar-btn: #ebebeb;
-  --accent-orng: #ff6a00;
+  --accent: #ff5d5d;
   --dark-primary: #121212;
   --dark-secondary: #282828;
   --dark-text-color: #ffffff;
@@ -15,7 +15,7 @@
   --dark-divider: #2a2a2a;
   --dark-actionBar-btn: #3d3d3d;
   --dark-post-modal: #1d1d1d;
-  --dark-accent-orng: #ff6a00;
+  --dark-accent: #ff5d5d;
   --white: #ffffff;
   --black: #000000;
   --linkColour: #a5a5a5;
@@ -8942,7 +8942,7 @@ main#install form .btn {
   margin-right: 5px;
 }
 .commentInputDivTxt:focus {
-  border: 2px solid light-dark(var(--accent-orng), var(--dark-accent-orng));
+  border: 2px solid light-dark(var(--accent), var(--dark-accent));
 }
 
 .commentInputForm {
@@ -9034,7 +9034,7 @@ main {
 }
 
 .actionBtn:hover {
-  background-color: light-dark(var(--accent-orng), var(--dark-accent-orng));
+  background-color: light-dark(var(--accent), var(--dark-accent));
   color: light-dark(var(--primary), var(--dark-primary));
 }
 
@@ -9069,7 +9069,7 @@ main {
   color: light-dark(var(--text-color), var(--dark-text-color));
 }
 .btn.btnCreateAccount {
-  background-color: light-dark(var(--accent-orng), var(--dark-accent-orng));
+  background-color: light-dark(var(--accent), var(--dark-accent));
   color: var(--white);
   padding: 8px;
 }/*# sourceMappingURL=style.css.map */

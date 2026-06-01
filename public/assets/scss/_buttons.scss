@@ -16,7 +16,7 @@
 }
 
 .actionBtn:hover {
-    background-color: variable.$accent-orng;
+    background-color: variable.$accent;
     color: variable.$primary;
 }
 
@@ -50,7 +50,7 @@
     border-radius: 25px;
     color: variable.$text-color;
     &.btnCreateAccount {
-        background-color: variable.$accent-orng;
+        background-color: variable.$accent;
         color: variable.$white;
         padding: 8px;
     }

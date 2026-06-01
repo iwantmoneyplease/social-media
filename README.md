@@ -16,4 +16,6 @@ Removed duplicate image loading code, it now checks if image is present.
 
 Removed two seperate headers, one with and one without the hamburger menu.
 
+Fixed darkmode cookie handling, in the header there's a handler
+
 Changed README

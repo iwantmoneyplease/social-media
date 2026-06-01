@@ -184,7 +184,7 @@ function openPost(user, title, content, image, postId, postType) {
                     <form method="get" action="save-comments.php" class="commentInputForm">
                         <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
-                        <input type="hidden" name="return_url" value="${window.location.href}">
+                        <input type="hidden" name="return_url" value=""${encodeURIComponent(window.location.href)}">
                         
                         <input type="hidden" name="post_id" value="${postId}">
 
