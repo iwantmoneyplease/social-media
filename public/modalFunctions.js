@@ -1,4 +1,3 @@
-
 function openPost(user, title, content, image, postId, postType) {
     const modal = document.getElementById("postModal");
     const modalBody = document.getElementById("modalBody");
@@ -38,6 +37,8 @@ function openPost(user, title, content, image, postId, postType) {
                     <form method="get" action="save-comments.php" class="commentInputForm">
                         <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
+                        <input type="hidden" name="return_url" value=""${encodeURIComponent(window.location.href)}">
+                        
                         <input type="hidden" name="post_id" value="${postId}">
 
                         <input class="sendCommentBtn commentInputDivBtn" type="submit" value="Send">
@@ -58,26 +59,4 @@ function openPost(user, title, content, image, postId, postType) {
     loadComments(postId);
 }
 
-function loadComments(postId) {
-    const container = document.getElementById("commentsList");
-
-    fetch('get-comments.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'post_id=' + postId
-    })
-    .then(response => response.text())
-    .then(data => {
-        container.innerHTML = data;
-    })
-    .catch(err => {
-        container.innerHTML = "Error";
-    });
-}
-
-function closeModal(event) {
-    const stateString = location.pathname;
-    window.history.pushState("object or string", "Title", stateString);
-    document.getElementById("postModal").style.display = "none";
-    document.body.style.overflow = "visible";
-}
+window.openPost = openPost;
