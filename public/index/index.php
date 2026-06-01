@@ -1,4 +1,10 @@
+<?php $sidebar = true; ?>
+
 <?php include("../templates/header.php"); ?>
+
+<?php
+$postToOpen = $_GET['post'] ?? null;
+?>
 
 <!--sidebar (left)-->
 <div class="sidebar animateLeft displayBlock" id="dirSidebar">
@@ -66,27 +72,17 @@ if ($result->num_rows > 0) {
             </div>
 
             <?php
-            $imgQuery = $conn->prepare("SELECT image_url FROM post_images WHERE post_id = ?");
-            $imgQuery->bind_param("i", $postId);
-            $imgQuery->execute();
-            $imgResult = $imgQuery->get_result();
 
-            if($imgResult->num_rows > 0) {
-                echo '<div class="postImages">';
-                $first = true;
-                while($imgRow = $imgResult->fetch_assoc()) {
-                    $imgUrl = htmlspecialchars($imgRow['image_url']);
-                    if($first) {
-                        echo "<div class='imageWrapper'>
-                                <img class='bgImage' src='$imgUrl'>
-                                <img class='mainImage' src='$imgUrl'>
-                              </div>";
-                        $first = false;
-                    }
-                }
-            echo '</div>';
+            if (!empty($image)) {
+            $imgUrl = htmlspecialchars($image);
+
+            echo "<div class='postImages'>
+                <div class='imageWrapper'>
+                    <img class='bgImage' src='$imgUrl'>
+                    <img class='mainImage' src='$imgUrl'>
+                </div>
+                </div>";
             }
-            $imgQuery->close();
             ?>
 
             <div class="postActions">
@@ -185,7 +181,7 @@ function openPost(user, title, content, image, postId, postType) {
                 <div class="modalDivider"></div>
 
                 <div id="commentInputDiv" class="commentInputDiv">
-                    <form method="post" action="save-comments.php" class="commentInputForm">
+                    <form method="get" action="save-comments.php" class="commentInputForm">
                         <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
                         <input type="hidden" name="post_id" value="${postId}">

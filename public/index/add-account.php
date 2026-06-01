@@ -1,4 +1,7 @@
+<?php $sidebar = false; ?>
+
 <?php include("../templates/header.php"); ?>
+
 <main id="create-account">
     <div class="accountSquare">
         <form method="post" action="post-add-account.php">

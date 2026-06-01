@@ -1,4 +1,6 @@
-<?php include("../templates/headerNoSidebar.php"); ?>
+<?php $sidebar = false; ?>
+
+<?php include("../templates/header.php"); ?>
 
 <main class="profileMain">
     <div class="profile">
@@ -153,7 +155,7 @@ function openPost(user, title, content, image, postId, postType) {
                 <div class="modalDivider"></div>
 
                 <div id="commentInputDiv" class="commentInputDiv">
-                    <form method="post" action="save-comments.php" class="commentInputForm">
+                    <form method="get" action="save-comments.php" class="commentInputForm">
                         <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
                         <input type="hidden" name="post_id" value="${postId}">

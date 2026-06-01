@@ -1,4 +1,7 @@
+<?php $sidebar = false; ?>
+
 <?php include("../templates/header.php"); ?>
+
 <div id="main">
 
 <div class="dashboard">

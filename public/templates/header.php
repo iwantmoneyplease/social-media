@@ -29,9 +29,11 @@ $username = $_SESSION['user_name'] ?? 'Guest';
 <header class="siteHeader">
     <div class="headerContainer">
         <div class="leftHeaderContainer">
-            <div class="burgerMenuContainer">
-                <button id="openNav" class="openSidebarBtn" onclick="openSidebar()">&#9776;</button>
-            </div>
+            <?php if (!empty($sidebar)): ?>
+                <div class="burgerMenuContainer">
+                    <button id="openNav" class="openSidebarBtn" onclick="openSidebar()">&#9776;</button>
+                </div>
+            <?php endif; ?>
             <div class="logoSymbol">
                 <a href="../index/index.php">
                     <h1>𝕍</h1>
