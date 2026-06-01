@@ -182,8 +182,10 @@ function openPost(user, title, content, image, postId, postType) {
 
                 <div id="commentInputDiv" class="commentInputDiv">
                     <form method="get" action="save-comments.php" class="commentInputForm">
-                        <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
+                        <input id="commentInputDivTxt" type="text" class="scommentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
+                        <input type="hidden" name="return_url" value="${window.location.href}">
+                        
                         <input type="hidden" name="post_id" value="${postId}">
 
                         <input class="sendCommentBtn commentInputDivBtn" type="submit" value="Send">
@@ -230,13 +232,23 @@ function closeModal(event) {
 
 <?php 
 
-if($_GET){
-$param = implode(",", $_GET);
-?>
+//eventlistener checks if you've loaded in
+window.addEventListener('load', () => {
+    const params = new URLSearchParams(window.location.search);
+    //reads the existing paramaters in the url
 
-    console.log("<?php echo $param; ?>");
-<?php
-}
-?>
+    //if it has the post index it reads the other params
+    if (params.has('pi')) {
+        openPost(
+            params.get('u'),
+            params.get('t'),
+            params.get('c'),
+            params.get('i'),
+            params.get('pi'),
+            params.get('pt')
+        );
+    }
+});
+
 </script>
 

@@ -19,6 +19,11 @@ if (isset($_GET['comment_content']) && isset($_GET['post_id'])) {
     }
 }
 
-header("Location: " . $_SERVER['HTTP_REFERER'] . "#post-" . $post_id);
+//checks if return_url is received from the form
+if (!empty($_GET['return_url'])) {
+    header("Location: " . $_GET['return_url'] . "&open=1");
+} else {
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+}
 exit();
 ?>
