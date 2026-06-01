@@ -1,0 +1,18 @@
+<?php $sidebar = false; ?>
+
+<?php include("../templates/header.php"); ?>
+
+
+<main id="login-account" class="login-main">
+    <div class="account-square">
+        <form method="post" action="post-login.php">
+            <h2>Welcome to 𝕍</h2>
+            <p>Log in to join the conversation</p>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="password">
+
+            <input class="btn btn-primary" type="submit" name="Log in">
+        </form>
+    </div>
+</main>
+<?php include("../templates/footer.php"); ?>

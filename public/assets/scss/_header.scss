@@ -1,0 +1,50 @@
+@use "variable";
+
+.siteHeader {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: variable.$primary; 
+    border-bottom: 1px solid variable.$border;
+}
+
+.headerContainer {
+    width: 100%;
+    box-sizing: border-box;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.headerBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+}
+
+.leftHeaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.userDisplay  {
+    display: flex;
+    align-items: center;
+}
+
+.userDisplay a {
+    text-decoration: none;
+    color: variable.$text-color;
+}
+
+.userDisplay p {
+    margin: 0;
+}
