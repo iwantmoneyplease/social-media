@@ -182,7 +182,7 @@ function openPost(user, title, content, image, postId, postType) {
 
                 <div id="commentInputDiv" class="commentInputDiv">
                     <form method="get" action="save-comments.php" class="commentInputForm">
-                        <input id="commentInputDivTxt" type="text" class="scommentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
+                        <input id="commentInputDivTxt" type="text" class="commentInputDivTxt" name="comment_content" placeholder="Write your thoughts..."></input>
 
                         <input type="hidden" name="return_url" value="${window.location.href}">
                         
@@ -229,8 +229,6 @@ function closeModal(event) {
     document.getElementById("postModal").style.display = "none";
     document.body.style.overflow = "visible";
 }
-
-<?php 
 
 //eventlistener checks if you've loaded in
 window.addEventListener('load', () => {
